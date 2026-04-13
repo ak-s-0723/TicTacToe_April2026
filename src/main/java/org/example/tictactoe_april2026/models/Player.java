@@ -9,6 +9,7 @@ public abstract class Player {
         this.symbol = symbol;
     }
 
+    public abstract Move makeMove(Board board);
     private Long id;
     private String name;
     private Symbol symbol;

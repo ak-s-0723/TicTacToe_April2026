@@ -19,13 +19,13 @@ public class Client {
         //You can ask user about each strategy and if he says yes, you can add that
         Game game = gameController.startGame(playerList,winningStrategies,size);
 
-        while (gameController.getGameState().equals(GameState.IN_PROGRESS)) {
-            gameController.displayBoard();
-            gameController.makeMove();
+        while (gameController.getGameState(game).equals(GameState.IN_PROGRESS)) {
+            gameController.displayBoard(game);
+            gameController.makeMove(game);
 
-            if(gameController.getGameState().equals(GameState.SUCCESS)) {
-                System.out.println("Winner is "+gameController.getWinner().getName());
-            } else if(gameController.getGameState().equals(GameState.DRAW)) {
+            if(gameController.getGameState(game).equals(GameState.SUCCESS)) {
+                System.out.println("Winner is "+gameController.getWinner(game).getName());
+            } else if(gameController.getGameState(game).equals(GameState.DRAW)) {
                 System.out.println("Game has ended in Draw");
             }
         }

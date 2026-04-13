@@ -14,6 +14,47 @@ public class Game {
     private List<WinningStrategy> winningStrategies;
     private Player winner;
 
+    private Boolean validateMove(Move move) {
+        int row = move.getCell().getRow();
+        int col = move.getCell().getCol();
+        if(row < 0 || col < 0 || row >= board.getSize() || col >= board.getSize()) {
+            return false;
+        }
+
+        return board.getCells().get(row).get(col).getCellState().equals(CellState.EMPTY);
+    }
+
+
+    public void makeMove() {
+        Player player = players.get(nextPlayerIndex);
+        Move move = player.makeMove(board);
+
+        if(!validateMove(move)) {
+            System.out.println("MOVE IS INVALID");
+            // you can have a while loop or throw an exception
+        }
+
+        Cell cellToChange = move.getCell();
+        cellToChange.setCellState(CellState.FILLED);
+        cellToChange.setSymbol(player.getSymbol());
+        moves.add(move);
+        nextPlayerIndex++;
+
+        for(WinningStrategy winningStrategy : winningStrategies) {
+            if(winningStrategy.checkWinner(move,board)) {
+                this.setGameState(GameState.SUCCESS);
+                this.winner = player;
+                System.out.println("Congrats, "+winner.getName());
+                return;
+            }
+        }
+
+        if(moves.size() == board.getSize()*board.getSize()) {
+            this.setGameState(GameState.DRAW);
+            System.out.println("DRAW");
+        }
+    }
+
 
     public Game(List<Player> players,
                 List<WinningStrategy> winningStrategies,

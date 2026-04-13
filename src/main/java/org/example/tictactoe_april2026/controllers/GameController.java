@@ -16,24 +16,24 @@ public class GameController {
 
     }
 
-    public void displayBoard() {
+    public void displayBoard(Game game) {
 
     }
 
-    public GameState getGameState() {
-      return null;
+    public GameState getGameState(Game game) {
+      return game.getGameState();
     }
 
     public void undo() {
 
     }
 
-    public Player getWinner() {
-        return null;
+    public Player getWinner(Game game) {
+        return game.getWinner();
     }
 
-    public void makeMove() {
-
+    public void makeMove(Game game) {
+      game.makeMove();
     }
 }
 
