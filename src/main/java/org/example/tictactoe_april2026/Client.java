@@ -2,6 +2,7 @@ package org.example.tictactoe_april2026;
 
 import org.example.tictactoe_april2026.controllers.GameController;
 import org.example.tictactoe_april2026.models.*;
+import org.example.tictactoe_april2026.strategies.ColumnWiseWinningStrategy;
 import org.example.tictactoe_april2026.strategies.RowWiseWinningStrategy;
 import org.example.tictactoe_april2026.strategies.WinningStrategy;
 
@@ -18,6 +19,7 @@ public class Client {
         int size = 3;
         List<WinningStrategy> winningStrategies = new ArrayList<>();
         winningStrategies.add(new RowWiseWinningStrategy());
+        winningStrategies.add(new ColumnWiseWinningStrategy());
         //You can ask user about each strategy and if he says yes, you can add that
         Game game = gameController.startGame(playerList,winningStrategies,size);
 
