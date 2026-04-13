@@ -15,15 +15,13 @@ public class Game {
     private Player winner;
 
     private Boolean validateMove(Move move) {
-        int row = move.getCell().getRow();
-        int col = move.getCell().getCol();
-        if(row < 0 || col < 0 || row >= board.getSize() || col >= board.getSize()) {
-            return false;
-        }
-
-        return board.getCells().get(row).get(col).getCellState().equals(CellState.EMPTY);
+        return board.getCells().get(move.getCell().getRow()).get(move.getCell().getCol()).getCellState().equals(CellState.EMPTY);
     }
 
+
+    public void displayBoard() {
+       board.display();
+    }
 
     public void makeMove() {
         Player player = players.get(nextPlayerIndex);
@@ -36,9 +34,10 @@ public class Game {
 
         Cell cellToChange = move.getCell();
         cellToChange.setCellState(CellState.FILLED);
-        cellToChange.setSymbol(player.getSymbol());
+        cellToChange.setSymbol(move.getPlayer().getSymbol());
         moves.add(move);
         nextPlayerIndex++;
+        nextPlayerIndex%=players.size(); //circularly come back0
 
         for(WinningStrategy winningStrategy : winningStrategies) {
             if(winningStrategy.checkWinner(move,board)) {

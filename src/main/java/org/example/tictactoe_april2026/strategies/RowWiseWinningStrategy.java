@@ -11,7 +11,6 @@ public class RowWiseWinningStrategy implements WinningStrategy {
     public Boolean checkWinner(Move move, Board board) {
         int row = move.getCell().getRow();
         Character character = move.getPlayer().getSymbol().getCharacter();
-
         if(!rowCounts.containsKey(row)) {
             rowCounts.put(row,new HashMap<>());
         }
@@ -22,7 +21,6 @@ public class RowWiseWinningStrategy implements WinningStrategy {
         }
 
         counts.put(character,counts.get(character)+1);
-
         if(counts.get(character) == board.getSize()) {
             return true;
         }

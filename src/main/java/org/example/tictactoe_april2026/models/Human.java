@@ -41,10 +41,24 @@ public class Human extends Player {
 
     @Override
     public Move makeMove(Board board) {
+        while(true) {
         System.out.println("Enter row in which you want to make a move");
         int row = scanner.nextInt();
         System.out.println("Enter col in which you want to make a move");
         int col = scanner.nextInt();
-        return new Move(new Cell(row,col),this);
+        if(!validateMoveOutOfBounds(row,col,board)) {
+            continue;
+        }
+        return new Move(board.getCells().get(row).get(col),this);
+        }
+    }
+
+    private Boolean validateMoveOutOfBounds(int row,int col,Board board) {
+        if (row < 0 || col < 0 || row >= board.getSize() || col >= board.getSize()) {
+            System.out.println("Please make move inside board !!");
+            return false;
+        }
+
+        return true;
     }
 }

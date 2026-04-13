@@ -18,6 +18,15 @@ public class Board {
         }
     }
 
+    public void display() {
+        for(List<Cell> row : cells) {
+            for(Cell cell : row) {
+                cell.display();
+            }
+            System.out.println();
+        }
+    }
+
     public List<List<Cell>> getCells() {
         return cells;
     }

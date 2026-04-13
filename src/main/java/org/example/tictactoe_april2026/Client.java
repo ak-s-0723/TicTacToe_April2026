@@ -2,6 +2,7 @@ package org.example.tictactoe_april2026;
 
 import org.example.tictactoe_april2026.controllers.GameController;
 import org.example.tictactoe_april2026.models.*;
+import org.example.tictactoe_april2026.strategies.RowWiseWinningStrategy;
 import org.example.tictactoe_april2026.strategies.WinningStrategy;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class Client {
         playerList.add(new Bot(2L,"JAADU",new Symbol('0'),BotDifficultyLevel.EASY));
         int size = 3;
         List<WinningStrategy> winningStrategies = new ArrayList<>();
+        winningStrategies.add(new RowWiseWinningStrategy());
         //You can ask user about each strategy and if he says yes, you can add that
         Game game = gameController.startGame(playerList,winningStrategies,size);
 
@@ -28,6 +30,7 @@ public class Client {
             } else if(gameController.getGameState(game).equals(GameState.DRAW)) {
                 System.out.println("Game has ended in Draw");
             }
+            System.out.println();
         }
 
     }
